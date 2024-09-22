@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addHours } from "date-fns";
 import { Event } from "react-big-calendar";
+import { CalendarInitialState } from "../interfaces/calendarInitialState";
 
 const tempEvent: Event =
 {
@@ -17,13 +18,15 @@ const tempEvent: Event =
     },
 }
 
+const initialState: CalendarInitialState = {
+    events: [tempEvent],
+    activeEvent: null
+}
+
 
 export const calendarSlice = createSlice({
     name: 'calendar',
-    initialState: {
-        events: [tempEvent],
-        activeEvent: null
-    },
+    initialState,
     reducers: {
         onSetActiveEvent: (state, action): void => {
             state.activeEvent = action.payload;
