@@ -1,6 +1,6 @@
 import { Calendar, Event, View } from 'react-big-calendar'
 import { localizer } from '../../helpers/calendarLocalizer'
-import { CSSProperties, useState } from 'react'
+import { CSSProperties, useEffect, useState } from 'react'
 import { Navbar } from "../components/Navbar"
 import { getMessages } from '../../helpers/getMessages'
 import { CalendarEvent } from '../components/CalendarEvent'
@@ -11,20 +11,24 @@ import { useCalendarStore } from '../../hooks/useCalendarStore'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { FabAddNew } from '../components/FabAddNew'
 import { FabDelete } from '../components/FabDelete'
+import { useAuthStore } from '../../hooks/useAuthStore'
 
 
 export const CalendarPage = (): JSX.Element => {
 
+    const { user } = useAuthStore()
     const { openDateModal } = useUiStore()
-    const { events, setActiveEvent } = useCalendarStore()
+    const { events, setActiveEvent, startLoadingEvents } = useCalendarStore()
 
     const [lastView, setLastView] = useState<View>(localStorage.getItem('lastView') as View || 'week')
 
     const eventStyleGetter = (event: Event, start: Date, end: Date, isSelected: boolean): { className?: string | undefined; style?: CSSProperties | undefined; } => {
 
+        const isMyEvent = event.resource.user.__id === user.__id
+
         return {
             style: {
-                backgroundColor: '#327CF7',
+                backgroundColor: isMyEvent ? '#327CF7' : '#465660',
                 borderRadius: '0px',
                 opacity: 0.8,
                 color: 'white',
@@ -44,6 +48,10 @@ export const CalendarPage = (): JSX.Element => {
         localStorage.setItem('lastView', event)
         setLastView(event)
     }
+
+    useEffect(() => {
+        startLoadingEvents()
+    }, [])
 
     return (
         <>

@@ -12,7 +12,7 @@ const login = async (email: string, password: string): Promise<{ name: string; _
     const tokenLocal = (new Date().getTime() * 123456).toString();
     localStorage.setItem('token', tokenLocal);
 
-    return { name: user.name, __id: user.uid }
+    return { name: user.name, __id: user.__id }
 }
 
 const signUp = async (name: string, email: string, password: string): Promise<{ name: string; __id: string }> => {

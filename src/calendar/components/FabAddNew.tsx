@@ -16,10 +16,7 @@ export const FabAddNew = (): JSX.Element => {
                 start: new Date(),
                 end: addHours(new Date(), 2),
                 resource: {
-                    user: {
-                        __id: '1',
-                        name: 'Darwin Ruiz',
-                    },
+                    user: {},
                     notes: ''
                 }
             }

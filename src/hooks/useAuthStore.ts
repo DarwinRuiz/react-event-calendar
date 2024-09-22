@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { onChecking, onLogin, onLogout } from "../store/auth/authSlice";
 import { checkToken, login, logout, signUp } from "../services/authService";
+import { onClearEvents } from "../store/calendar/calendarSlice";
 
 export const useAuthStore = (): Record<string, any> => {
 
@@ -53,6 +54,7 @@ export const useAuthStore = (): Record<string, any> => {
 
     const startLogout = () => {
         logout()
+        dispatch(onClearEvents(undefined));
         dispatch(onLogout(undefined));
     }
 
