@@ -141,25 +141,33 @@ export const CalendarModal = (): JSX.Element => {
                     <label>Fecha y hora inicio</label>
                     <DatePicker
                         className="form-control"
+                        wrapperClassName="d-block"
                         selected={formValue.start}
                         onChange={(event) => { onDatePickerChanged(event, 'start') }}
                         dateFormat='Pp'
                         showTimeSelect
                         locale='es'
-                        timeCaption='Hora' />
+                        timeCaption='Hora'
+                        showIcon
+                        toggleCalendarOnIconClick
+                    />
                 </div>
 
                 <div className="form-group mb-2">
                     <label>Fecha y hora fin</label>
                     <DatePicker
                         className="form-control"
+                        wrapperClassName="d-block"
                         selected={formValue.end}
                         onChange={(event) => { onDatePickerChanged(event, 'end') }}
                         dateFormat='Pp'
                         minDate={formValue.start}
                         showTimeSelect
                         locale='es'
-                        timeCaption='Hora' />
+                        timeCaption='Hora'
+                        showIcon
+                        toggleCalendarOnIconClick
+                    />
 
                 </div>
 
